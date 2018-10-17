@@ -28,3 +28,5 @@ cf bind-service moviefun albums-mysql
 git checkout -b two-data-sources
 
 git commit -am "work in progress"
+
+git push -u other two-data-sources -f
