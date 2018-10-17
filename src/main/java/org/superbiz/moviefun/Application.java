@@ -2,10 +2,18 @@ package org.superbiz.moviefun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionOperations;
+import org.springframework.transaction.support.TransactionTemplate;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        DataSourceAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class
+})
 public class Application {
 
     public static void main(String... args) {
@@ -16,4 +24,14 @@ public class Application {
     public ServletRegistrationBean actionServletRegistration(ActionServlet actionServlet) {
         return new ServletRegistrationBean(actionServlet, "/moviefun/*");
     }
+
+//    @Bean
+//    public TransactionOperations moviesTransactionOperations(PlatformTransactionManager moviesTransactionManager) {
+//        return new TransactionTemplate(moviesTransactionManager);
+//    }
+
+//    @Bean
+//    public TransactionOperations albumsTransactionOperations(PlatformTransactionManager albumsTransactionManager) {
+//        return new TransactionTemplate(albumsTransactionManager);
+//    }
 }

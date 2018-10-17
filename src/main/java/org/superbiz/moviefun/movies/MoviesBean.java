@@ -29,29 +29,29 @@ import java.util.List;
 @Repository
 public class MoviesBean {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "movies")
     private EntityManager entityManager;
 
     public Movie find(Long id) {
         return entityManager.find(Movie.class, id);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "moviesTransactionManager")
     public void addMovie(Movie movie) {
         entityManager.persist(movie);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "moviesTransactionManager")
     public void editMovie(Movie movie) {
         entityManager.merge(movie);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "moviesTransactionManager")
     public void deleteMovie(Movie movie) {
         entityManager.remove(movie);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "moviesTransactionManager")
     public void deleteMovieId(long id) {
         Movie movie = entityManager.find(Movie.class, id);
         deleteMovie(movie);
@@ -111,6 +111,7 @@ public class MoviesBean {
         return q.getResultList();
     }
 
+    @Transactional(transactionManager = "moviesTransactionManager")
     public void clean() {
         entityManager.createQuery("delete from Movie").executeUpdate();
     }
