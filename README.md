@@ -13,3 +13,13 @@ $ mvn clean package -DskipTests -Dmaven.test.skip=true
 ```
 $ MOVIE_FUN_URL=http://moviefun.example.com mvn test
 ```
+
+cf unbind-service APP_NAME SERVICE_INSTANCE
+cf unbind-service moviefun albums-mysql
+
+mvn clean package -DskipTests
+cf push moviefun -p target/moviefun.war --random-route
+
+git push -u other read-resource-from-classpath -f
+
+git checkout -b write-to-blobstore write-to-blobstore-start
