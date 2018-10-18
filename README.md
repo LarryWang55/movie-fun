@@ -13,3 +13,8 @@ $ mvn clean package -DskipTests -Dmaven.test.skip=true
 ```
 $ MOVIE_FUN_URL=http://moviefun.example.com mvn test
 ```
+git checkout -b write-to-blobstore write-to-blobstore-start
+git commit -am "CsvUtils.java"
+
+mvn clean package -DskipTests
+mvn spring-boot:run
